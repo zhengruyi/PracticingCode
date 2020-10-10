@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algorithm/Algorithm.iml" filepath="$PROJECT_DIR$/Algorithm/Algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoderInterview/CoderInterview.iml" filepath="$PROJECT_DIR$/CoderInterview/CoderInterview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaGuideAlorithm/JavaGuideAlorithm.iml" filepath="$PROJECT_DIR$/JavaGuideAlorithm/JavaGuideAlorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NowCoder/NowCoder.iml" filepath="$PROJECT_DIR$/NowCoder/NowCoder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PracticingCode.iml" filepath="$PROJECT_DIR$/.idea/PracticingCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/剑指offer/剑指offer.iml" filepath="$PROJECT_DIR$/剑指offer/剑指offer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/程序员代码面试指南/程序员代码面试指南.iml" filepath="$PROJECT_DIR$/程序员代码面试指南/程序员代码面试指南.iml" />
+      <module fileurl="file://$PROJECT_DIR$/趣学算法/趣学算法.iml" filepath="$PROJECT_DIR$/趣学算法/趣学算法.iml" />
+    </modules>
+  </component>
+</project>
