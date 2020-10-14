@@ -1,4 +1,4 @@
-package Chapter1差分数组.Q1109_航班预定统计;
+package Chapter1差分数组和前缀和数组.Q1109_航班预定统计;
 
 /**
  * @author Ruyi ZHENG
