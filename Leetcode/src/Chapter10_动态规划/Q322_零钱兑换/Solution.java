@@ -1,6 +1,8 @@
 package Chapter10_动态规划.Q322_零钱兑换;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @author Ruyi ZHENG

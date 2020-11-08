@@ -56,6 +56,5 @@ public class Solution {
         }
         //牌堆数目就是最长递增子序列
         return piles;
-
     }
 }
