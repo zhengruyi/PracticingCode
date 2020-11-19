@@ -9,24 +9,36 @@ import java.util.Comparator;
 
 public class Test {
     public static void main(String[] args) {
-        numSquares(12);
+        findTheLongestSubstring("biaa");
     }
-    public static int numSquares(int n) {
-        int len = (int)Math.sqrt(n) + 1;
-        int[] nums = new int[len+1];
-        for(int i =1; i <= len; i++){
-            nums[i] = i * i;
+    public static int findTheLongestSubstring(String s) {
+        if(s == null || s.length() == 0){
+            return 0;
         }
-        int[] dp = new int[n+1];
-        Arrays.fill(dp,n+1);
-        for(int i = 1; i<=n; i++){
-            for(int j =1; j <= len; j++){
-                if(i < nums[j]){
-                    break;
-                }
-                dp[i] = Math.min(dp[i],dp[i-nums[j]]+1);
+        char[] chas = s.toCharArray();
+        int[] statu = new int[1 << 5];
+        Arrays.fill(statu,-1);
+        statu[0] = 0;
+        int count = 0;
+        int res = 0;
+        for(int i =0; i < chas.length; i++){
+            if(chas[i] == 'a'){
+                count ^= (1 << 0);
+            }else if(chas[i] == 'e'){
+                count ^= (1 << 1);
+            }else if(chas[i] == 'i'){
+                count ^= (1 << 2);
+            }else if(chas[i] == 'o'){
+                count ^= (1 << 3);
+            }else if(chas[i] == 'u'){
+                count ^= (1 << 4);
+            }
+            if(statu[count] >= 0){
+                res = Math.max(res, i+1 - statu[count]);
+            }else{
+                statu[count] = i+1;
             }
         }
-        return dp[n];
+        return res;
     }
 }
