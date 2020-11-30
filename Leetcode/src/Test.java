@@ -9,33 +9,31 @@ import java.util.Comparator;
  **/
 
 public class Test {
-    public static String reverseWords(String s) {
-        s = s.trim();
-        if(s.length() == 0){
-            return s;
-        }
-        s = new StringBuilder(s).reverse().toString();
-        StringBuilder builder = new StringBuilder();
-        int start = 0;
-        int i = 0;
-        for(i = 0; i <s.length();i++){
-            if(s.charAt(i) == ' '){
-                if(i - start > 1){
-                    builder.append(new StringBuilder(s.substring(start,i)).reverse().toString());
-                    builder.append(' ');
+    public static int removeElement(int[] nums, int val) {
+        int slow = 0;
+        int fast = 0;
+        loop:
+        while(fast < nums.length){
+            while(slow < nums.length){
+                if(nums[slow] != val){
+                    slow++;
+                    continue;
                 }
-                start = i;
+                break;
             }
+            fast = slow;
+            while(nums[fast] == val && fast < nums.length){
+                fast++;
+            }
+            nums[slow] = nums[fast];
+            nums[fast] = val;
+            fast++;
         }
-        if(i - start > 1){
-            builder.append(new StringBuilder(s.substring(start,i)).reverse().toString());
-        }
-
-        return builder.toString().trim();
+        return slow;
     }
 
     public static void main(String[] args) {
-        int[][] intervals = {{1,2,3},{4,5,6},{7,8,9}};
-        reverseWords("the sky is blue");
+        int[] nums = {4,5};
+        removeElement(nums,4);
     }
 }
