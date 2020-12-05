@@ -37,29 +37,35 @@ public class Test {
     }
     static boolean loop() { return loop(); }
     static boolean or(BooleanSupplier b1, BooleanSupplier b2) { return b1.getAsBoolean() || b2.getAsBoolean(); }
-    public static TreeNode deserialize(String data) {
-        String[] datas = data.split("#");
-        int len = datas.length;
-        TreeNode[] trees = new TreeNode[datas.length];
-        for(int i = 0; i < len; i++){
-            if("null".equals(datas[i])){
-                trees[i] = null;
-            }else{
-                trees[i] = new TreeNode(Integer.parseInt(datas[i]));
+    public static int[][] reconstructQueue(int[][] people) {
+        Arrays.sort(people, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] o1, int[] o2){
+                if(o1[0] != o2[0]){
+                    return o1[0] - o2[0];
+                }else{
+                    return o2[1] - o1[1];
+                }
+            }
+        });
+        int n = people.length;
+        int[][] res = new int[n][2];
+        for(int[] person : people){
+            int space = person[1] + 1;
+            for(int i = 0; i < n; i++){
+                if(res[i] == null){
+                    --space;
+                    if(space == 0){
+                        res[i] = person;
+                        break;
+                    }
+                }
             }
         }
-        for(int i =0; i < trees.length;i++){
-            if((2 * i + 1) < len && trees[i] != null){
-                trees[i].left = trees[2*i+1];
-            }
-            if((2 * i + 2) < len && trees[i] != null){
-                trees[i].right = trees[2*i+2];
-            }
-        }
-        return trees[0];
+        return res;
     }
     public static void main(String[] args) {
-        TreeNode root = deserialize("1#2#3#null#null#4#5#6#7#null#null#null#null#null#null#");
-        System.out.println(root);
+        int[][] nums = {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+        reconstructQueue(nums);
     }
 }
