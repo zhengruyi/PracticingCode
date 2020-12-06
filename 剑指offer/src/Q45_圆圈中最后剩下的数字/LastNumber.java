@@ -1,7 +1,7 @@
 package Q45_圆圈中最后剩下的数字;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author Ruyi ZHENG
@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Test;
 
 public class LastNumber {
     public int  getLastNumber(int n, int m){
-        if(n < 0 || m < 0)
+        if(n < 0 || m < 0){
             return -1;
+        }
         Node head  = new Node(0,null);
         Node h = head;
         int num = n;
