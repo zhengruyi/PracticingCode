@@ -65,7 +65,14 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        int[] nums = {4, 1, 8, 7};
-        judgePoint24(nums);
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        sc.nextLine();
+        String s = sc.nextLine();
+        String[] strs = s.split(" ");
+        Arrays.sort(strs);
+        for(String t : strs){
+            System.out.print(t);
+        }
     }
 }
