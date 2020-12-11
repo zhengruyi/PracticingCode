@@ -24,7 +24,6 @@ public class MinimumNumber {
         }
         System.out.println(buffer.toString());
     }
-
     public static void quickSort(ArrayList<String> list, int start, int end){
         if(start >= end)
             return ;

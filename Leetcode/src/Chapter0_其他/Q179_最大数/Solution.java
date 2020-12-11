@@ -1,43 +1,48 @@
-import Chapter13_二叉树.TreeNode;
-
-import java.math.BigInteger;
-import java.util.*;
-import java.util.function.BooleanSupplier;
-import java.util.function.Function;
-import java.util.function.IntFunction;
+package Chapter0_其他.Q179_最大数;
 
 /**
  * @author Ruyi ZHENG
  * @version 1.00
- * @time 08/11/2020 12:55
+ * @time 11/12/2020 23:08
  **/
 
-public class Test {
-    static String[] strs;
-    public static String largestNumber(int[] nums) {
+public class Solution {
+    String[] strs;
+
+    /**
+     * 总的来说吧数组中的数字排列成最大数或者最小数，本质上就是用改变了快排的方法
+     * 具体来说只改变了比较函数，其余不变
+     * @param nums
+     * @return
+     */
+    public String largestNumber(int[] nums) {
         if(nums == null || nums.length == 0){
             return "";
         }
         strs = new String[nums.length];
+        //只有封装后的Integer.String等实现了comparable接口，可以用来比较大小
         for(int i = 0; i < nums.length; i++){
             strs[i] = String.valueOf(nums[i]);
         }
         quickSort(0,strs.length - 1);
         StringBuilder builder = new StringBuilder();
+        //去除前缀0
         boolean isFirstZero = true;
         for(int i =0; i < strs.length; i++){
             if(isFirstZero && strs[i].equals("0")){
                 continue;
             }
+            isFirstZero = false;
             builder.append(strs[i]);
         }
         return builder.length() == 0 ? "0" : builder.toString();
 
     }
-    public static void quickSort(int start, int end){
+    public void quickSort(int start, int end){
         if(start >= end){
             return;
         }
+        //填坑法实现快速排序
         int left = start;
         int right = end;
         String threshold = strs[left];
@@ -61,10 +66,12 @@ public class Test {
         quickSort(start,left);
         quickSort(left+1, end);
     }
-    public static boolean compare(String s1, String s2){
+    /**
+     * 由于这里是构成最大数，所以是快排降序排列，所以对于compare(strs[right,threshold])来说
+     * 希望right+threshold > threshold + right,所以对于所有right < threshold的右边元素来说，我们保持不变
+     * 直到找到一个大于threshold的元素，填到左边去使整体更大
+     */
+    public boolean compare(String s1, String s2){
         return (s1+s2).compareTo(s2+s1) <= 0;
-    }
-    public static void main(String[] args) {
-        largestNumber(new int[]{1,2,3,4,5,6,7,8,9,0});
     }
 }
