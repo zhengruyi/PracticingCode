@@ -65,6 +65,9 @@ public class Test {
         return (s1+s2).compareTo(s2+s1) <= 0;
     }
     public static void main(String[] args) {
-        largestNumber(new int[]{1,2,3,4,5,6,7,8,9,0});
+        String s = "192.168.0.1";
+        String[] strs = s.split("\\.");
+        for(String ss : strs){
+        }
     }
 }
