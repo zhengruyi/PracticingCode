@@ -1,10 +1,6 @@
 import Chapter13_二叉树.TreeNode;
-
-import java.math.BigInteger;
 import java.util.*;
-import java.util.function.BooleanSupplier;
-import java.util.function.Function;
-import java.util.function.IntFunction;
+
 
 /**
  * @author Ruyi ZHENG
@@ -13,47 +9,49 @@ import java.util.function.IntFunction;
  **/
 
 public class Test {
-    public int[][] generateMatrix(int n) {
-        int startRow =0, startCol = 0;
-        int endRow = n-1, endCol = n-1;
-        int num = 1;
-        int[][] matrix = new int[n][n];
-        while(startRow <= endRow){
-            if(startCol > endCol){
-                break;
-            }
-            for(int j = startCol; j <= endCol; j++){
-                matrix[startRow][j] = num++;
-            }
-            startRow++;
-            if(startRow > endRow){
-                break;
-            }
-            for(int i = startRow; i <= endRow; i++){
-                matrix[i][endCol] = num++;
-            }
-            endCol--;
-            if(startCol > endCol){
-                break;
-            }
-            for(int j = endCol; j>= startCol;j--){
-                matrix[endRow][j] = num++;
-            }
-            endRow--;
-            if(startRow > endRow){
-                break;
-            }
-            for(int i = endRow; i>= startRow; i--){
-                matrix[startCol][i] = num++;
-            }
-            startCol++;
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> res = new ArrayList<>();
+        if(s == null || s.length() == 0 || words == null || words.length == 0){
+            return res;
         }
-        return matrix;
+        Map<String,Integer> map = new HashMap<String,Integer>();
+        for(String t : words){
+            map.put(t,map.getOrDefault(t,0)+1);
+        }
+        int oneWordLength = words[0].length();
+        int num = words.length;
+        int allLength = num * oneWordLength;
+        for(int i = 0; i < oneWordLength; i++) {
+            int left = i, right = i, count = 0;
+            HashMap <String, Integer> tmp = new HashMap <>();
+            while (right + oneWordLength <= s.length()) {
+                String w = s.substring(right, right + oneWordLength);
+                right += oneWordLength;
+                if (!map.containsKey(w)) {
+                    count = 0;
+                    left = right;
+                    tmp.clear();
+                } else {
+                    tmp.put(w, tmp.getOrDefault(w, 0) + 1);
+                    count++;
+                    while (tmp.get(w) > map.get(w)) {
+                        String t = s.substring(left, left + oneWordLength);
+                        count--;
+                        tmp.put(w, tmp.get(w) - 1);
+                        left += oneWordLength;
+                    }
+                    if (count == num) {
+                        res.add(left);
+                    }
+                }
+            }
+        }
+        return res;
     }
     @org.junit.jupiter.api.Test
     void test(){
-        int[] preorder = {3,9,20,15,7};
-        int[] inorder = {9,3,15,20,7};
-        generateMatrix(3);
+        String s = "wordgoodgoodgoodbestword";
+        String[] words = {"word","good","best","word"};
+        findSubstring(s,words);
     }
 }
