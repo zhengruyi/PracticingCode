@@ -1,5 +1,7 @@
 package Chapter0_其他.Q75_颜色分类;
 
+import java.util.Arrays;
+
 /**
  * @author Ruyi ZHENG
  * @version 1.00
