@@ -54,4 +54,9 @@ public class Test {
         String[] words = {"word","good","best","word"};
         findSubstring(s,words);
     }
+
+    public static void main(String[] args) {
+        int x = 46339;
+        System.out.println(x*x);
+    }
 }
