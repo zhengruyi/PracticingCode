@@ -1,5 +1,7 @@
 package Q51_数组中的逆序对;
 
+import java.util.List;
+
 /**
  * @author Ruyi ZHENG
  * @version 1.00
