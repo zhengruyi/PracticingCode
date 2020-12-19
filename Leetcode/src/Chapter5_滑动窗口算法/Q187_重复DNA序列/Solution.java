@@ -42,8 +42,11 @@ public class Solution {
             window |= map[s.charAt(i) - 'A'];
             //只取后20位
             window &= 0xfffff;
+            //表示是否是第一次出现
             if(set.contains(window)){
+                //答案中是否包含
                 if(!tmp.contains(window)){
+                    //更新链表
                     String ss = s.substring(i-9,i+1);
                     res.add(ss);
                     tmp.add(window);
