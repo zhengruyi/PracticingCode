@@ -9,21 +9,33 @@ import java.util.*;
  **/
 
 public class Test {
-
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.offer(1);
+        int index = 0;
+        while(index < n){
+            int num = pq.poll();
+            index++;
+            if(index == n - 1){
+                return num;
+            }
+            for(int i = 0; i < primes.length; i++){
+                if(!pq.contains(num*primes[i])){
+                    pq.offer(num*primes[i]);
+                }
+            }
+        }
+        return 0;
+    }
     @org.junit.jupiter.api.Test
     void test(){
+        int[] num ={2,7,13,19};
+        nthSuperUglyNumber(12,num);
 
     }
 
     public static void main(String[] args) {
-        String S = "cba";
-        String T = "abcd";
-        Map<Character,Integer> map = new HashMap<Character,Integer>();
-        for(int i = 0; i < S.length();i++){
-            map.put(S.charAt(i),i);
-        }
-        Character[] tmp = {'a'};
-        Arrays.sort(tmp,(o1,o2) -> map.getOrDefault(o1,-1) - map.getOrDefault(o2,-1));
+        System.out.println((int) 'A');
     }
 
 }
