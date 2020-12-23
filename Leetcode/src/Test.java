@@ -35,7 +35,15 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println((int) 'A');
+        int i = 5;
+        while (i > 0) {
+            i -= lowbit(i);
+            System.out.println(i);
+        }
+    }
+    public static int lowbit(int x) {
+        // 等价：x & (~x +1)
+        return x & (-x);
     }
 
 }
