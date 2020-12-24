@@ -9,29 +9,22 @@ import java.util.*;
  **/
 
 public class Test {
-    public int nthSuperUglyNumber(int n, int[] primes) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        pq.offer(1);
-        int index = 0;
-        while(index < n){
-            int num = pq.poll();
-            index++;
-            if(index == n - 1){
-                return num;
-            }
-            for(int i = 0; i < primes.length; i++){
-                if(!pq.contains(num*primes[i])){
-                    pq.offer(num*primes[i]);
-                }
+    public int triangleNumber(int[] nums) {
+        int count = 0;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            int k = i + 2;
+            for (int j = i + 1; j < nums.length - 1 && nums[i] != 0; j++) {
+                while (k < nums.length && nums[i] + nums[j] > nums[k])
+                    k++;
+                count += k - j - 1;
             }
         }
-        return 0;
+        return count;
     }
     @org.junit.jupiter.api.Test
     void test(){
-        int[] num ={2,7,13,19};
-        nthSuperUglyNumber(12,num);
-
+        triangleNumber(new int[]{2,2,3,4});
     }
 
     public static void main(String[] args) {
@@ -40,6 +33,7 @@ public class Test {
             i -= lowbit(i);
             System.out.println(i);
         }
+
     }
     public static int lowbit(int x) {
         // 等价：x & (~x +1)
