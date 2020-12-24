@@ -9,22 +9,33 @@ import java.util.*;
  **/
 
 public class Test {
-    public int triangleNumber(int[] nums) {
-        int count = 0;
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length - 2; i++) {
-            int k = i + 2;
-            for (int j = i + 1; j < nums.length - 1 && nums[i] != 0; j++) {
-                while (k < nums.length && nums[i] + nums[j] > nums[k])
-                    k++;
-                count += k - j - 1;
+    public int singleNonDuplicate(int[] nums) {
+        int lo = 0;
+        int hi = nums.length -1;
+        while(lo < hi){
+            int mid = lo + (hi - lo)/2;
+            boolean isEven = (hi - mid) % 2 != 0;
+            if(nums[mid + 1] == nums[mid]){
+                if(isEven){
+                    hi = mid - 1;
+                }else{
+                    lo = mid + 2;
+                }
+            }else if(nums[mid] == nums[mid-1]){
+                if(!isEven){
+                    lo  = mid + 1;
+                }else{
+                    hi = mid -2;
+                }
+            }else{
+                return nums[mid];
             }
         }
-        return count;
+        return nums[lo];
     }
     @org.junit.jupiter.api.Test
     void test(){
-        triangleNumber(new int[]{2,2,3,4});
+        singleNonDuplicate(new int[]{1,1,2,3,3,4,4,8,8});
     }
 
     public static void main(String[] args) {
