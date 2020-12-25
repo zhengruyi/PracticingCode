@@ -9,33 +9,25 @@ import java.util.*;
  **/
 
 public class Test {
-    public int singleNonDuplicate(int[] nums) {
-        int lo = 0;
-        int hi = nums.length -1;
-        while(lo < hi){
-            int mid = lo + (hi - lo)/2;
-            boolean isEven = (hi - mid) % 2 != 0;
-            if(nums[mid + 1] == nums[mid]){
-                if(isEven){
-                    hi = mid - 1;
-                }else{
-                    lo = mid + 2;
-                }
-            }else if(nums[mid] == nums[mid-1]){
-                if(!isEven){
-                    lo  = mid + 1;
-                }else{
-                    hi = mid -2;
-                }
-            }else{
-                return nums[mid];
-            }
+    public int countNumbersWithUniqueDigits(int n) {
+        if(n == 1){
+            return 10;
         }
-        return nums[lo];
+        int sum = 10;
+        int times = 9;
+        for(int j = 2; j <= n; j++){
+            for(int i = 1; i < n; i++){
+                times *= (10 - i);
+            }
+            sum += times;
+            times = 9;
+        }
+
+        return sum;
     }
     @org.junit.jupiter.api.Test
     void test(){
-        singleNonDuplicate(new int[]{1,1,2,3,3,4,4,8,8});
+        countNumbersWithUniqueDigits(3);
     }
 
     public static void main(String[] args) {
