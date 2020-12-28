@@ -1,24 +1,34 @@
-import Chapter13_二叉树.TreeNode;
-import java.util.*;
-
+package Chapter0_其他.Q143_重排链表;
 
 /**
  * @author Ruyi ZHENG
  * @version 1.00
- * @time 08/11/2020 12:55
+ * @time 28/12/2020 23:05
  **/
 
-public class Test {
+public class Solution {
+    /**
+     * 基本思路，找到链表的中间节点，分成两条链表后
+     * 翻转右边部分链表，最后按照规则合并两个链表
+     * @param head
+     */
     public void reorderList(ListNode head) {
         if(head == null || head.next == null){
             return;
         }
         ListNode mid = getMid(head);
+        //中间链表的下一个节点就是右半部分链表的头结点
         ListNode l2 = mid.next;
         mid.next = null;
         l2 = reverseList(l2);
         mergeList(head,l2);
     }
+
+    /**
+     * 找出链表的中间节点
+     * @param head
+     * @return
+     */
     public ListNode getMid(ListNode head){
         ListNode fast = head;
         ListNode slow = head;
@@ -28,6 +38,12 @@ public class Test {
         }
         return slow;
     }
+
+    /**
+     * 翻转链表并返回新的节点头
+     * @param head
+     * @return
+     */
     public ListNode reverseList(ListNode head){
         ListNode pre = null;
         ListNode curr = head;
@@ -40,15 +56,22 @@ public class Test {
         }
         return pre;
     }
+
+    /**
+     * 合并两个有序链表
+     * @param h1
+     * @param h2
+     * @return
+     */
     public ListNode mergeList(ListNode h1, ListNode h2){
         ListNode dummy = new ListNode(-1);
         ListNode pre = dummy;
         while(h1 != null && h2 != null){
             pre.next = h1;
             pre = h1;
+            h1 = h1.next;
             pre.next = h2;
             pre = h2;
-            h1 = h1.next;
             h2 = h2.next;
         }
         if(h1 != null){
@@ -59,22 +82,6 @@ public class Test {
         }
         return dummy.next;
     }
-    @org.junit.jupiter.api.Test
-    void test(){
-        ListNode n4 = new ListNode(4);
-        ListNode n3 = new ListNode(3,n4);
-        ListNode n2 = new ListNode(2,n3);
-        ListNode n1 = new ListNode(1,n2);
-        reorderList(n1);
-
-    }
-
-    public static void main(String[] args) {
-        String s = "/a/../../b/../c//.//";
-        String[] str = s.split("/");
-        System.out.println(s);
-    }
-
 }
 class ListNode {
       int val;

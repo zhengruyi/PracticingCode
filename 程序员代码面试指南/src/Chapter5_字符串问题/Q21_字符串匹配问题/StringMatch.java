@@ -1,7 +1,7 @@
 package Chapter5_字符串问题.Q21_字符串匹配问题;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author Ruyi ZHENG
