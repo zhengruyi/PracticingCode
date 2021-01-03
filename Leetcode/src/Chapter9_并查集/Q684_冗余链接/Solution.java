@@ -1,14 +1,17 @@
-import Chapter13_二叉树.TreeNode;
-import java.util.*;
-
+package Chapter9_并查集.Q684_冗余链接;
 
 /**
  * @author Ruyi ZHENG
  * @version 1.00
- * @time 08/11/2020 12:55
+ * @time 03/01/2021 22:51
  **/
 
-public class Test {
+public class Solution {
+    /**
+     * 主要用并查集来快速查找两个节点是否相连
+     * @param edges
+     * @return
+     */
     public int[] findRedundantConnection(int[][] edges) {
         if(edges == null || edges.length == 0){
             return new int[]{0,0};
@@ -16,23 +19,13 @@ public class Test {
         int n = edges.length + 1;
         UnionFindSet set = new UnionFindSet(n);
         for(int[] edge : edges){
+            //如果两个节点已经相连，那么这条边就是最终的冗余边
             if(set.union(edge[0],edge[1])){
                 return edge;
             }
         }
         return new int[]{0,0};
     }
-    @org.junit.jupiter.api.Test
-    void test(){
-        int[][] nums = {{1,2},{1,3},{2,3}};
-        findRedundantConnection(nums);
-    }
-
-    public static void main(String[] args) {
-        System.out.println((char)('b'+'A' - 'a'));
-        System.out.println('A' - 'a');
-    }
-
 }
 class UnionFindSet{
     private int[] parents;
@@ -44,6 +37,12 @@ class UnionFindSet{
             parents[i] = i;
         }
     }
+
+    /**
+     * 赌鬼方式查找根节点，同时压缩路径
+     * @param x
+     * @return
+     */
     public int find(int x){
         if(x != parents[x]){
             parents[x] = find(parents[x]);
