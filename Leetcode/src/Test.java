@@ -29,8 +29,8 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println((char)('b'+'A' - 'a'));
-        System.out.println('A' - 'a');
+        String s = "a b c";
+        System.out.println(s.split(" ")[0]);
     }
 
 }
