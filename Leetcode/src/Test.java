@@ -9,23 +9,51 @@ import java.util.*;
  **/
 
 public class Test {
-    public int[] findRedundantConnection(int[][] edges) {
-        if(edges == null || edges.length == 0){
-            return new int[]{0,0};
+    public int orangesRotting(int[][] grid) {
+        if(grid.length == 0 || grid[0].length == 0){
+            return 0;
         }
-        int n = edges.length + 1;
-        UnionFindSet set = new UnionFindSet(n);
-        for(int[] edge : edges){
-            if(set.union(edge[0],edge[1])){
-                return edge;
+        int time = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        int num = 0;
+        int[] dx = {0,0,1,-1};
+        int[] dy = {1,-1,0,0};
+        Queue<int[]> queue = new LinkedList<>();
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == 1){
+                    num++;
+                }else if(grid[i][j] == 2){
+                    queue.offer(new int[]{i,j});
+                }
             }
         }
-        return new int[]{0,0};
+        if(num == 0){
+            return 0;
+        }
+        while(!queue.isEmpty()){
+            int[] position = queue.poll();
+            time++;
+            for(int i = 0; i < dx.length; i++){
+                int newX = position[0] + dx[i];
+                int newY = position[1] + dy[i];
+                if(newX >= 0 && newX < m && newY >= 0 && newY < n && grid[newX][newY] == 1){
+                    queue.offer(new int[] {newX,newY});
+                    grid[newX][newY] = 2;
+                    num--;
+                }
+            }
+            if(num == 0){
+                return time;
+            }
+        }
+        return num == 0 ? time : -1;
     }
     @org.junit.jupiter.api.Test
     void test(){
-        int[][] nums = {{1,2},{1,3},{2,3}};
-        findRedundantConnection(nums);
+        int[][] nums = {{2,1,1},{1,1,0},{0,1,1}};
+        orangesRotting(nums);
     }
 
     public static void main(String[] args) {
