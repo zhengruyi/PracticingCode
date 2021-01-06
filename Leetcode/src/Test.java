@@ -57,8 +57,8 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        String s = "a b c";
-        System.out.println(s.split(" ")[0]);
+        int[] nums = {1,3,4,6,9};
+        System.out.println(Arrays.binarySearch(nums,10));
     }
 
 }
