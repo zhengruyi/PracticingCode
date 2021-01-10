@@ -9,56 +9,30 @@ import java.util.*;
  **/
 
 public class Test {
-    public int orangesRotting(int[][] grid) {
-        if(grid.length == 0 || grid[0].length == 0){
-            return 0;
-        }
-        int time = 0;
-        int m = grid.length;
-        int n = grid[0].length;
-        int num = 0;
-        int[] dx = {0,0,1,-1};
-        int[] dy = {1,-1,0,0};
-        Queue<int[]> queue = new LinkedList<>();
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(grid[i][j] == 1){
-                    num++;
-                }else if(grid[i][j] == 2){
-                    queue.offer(new int[]{i,j});
-                }
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int index = 0;
+        Stack<Integer> stack = new Stack<>();
+        for(int i = 0; i < popped.length; i++){
+            if(!stack.isEmpty() && stack.peek() == popped[i]){
+                stack.pop();
+                continue;
+            }
+            while(index < pushed.length && pushed[index] != popped[i]){
+                stack.push(pushed[index++]);
             }
         }
-        if(num == 0){
-            return 0;
-        }
-        while(!queue.isEmpty()){
-            int[] position = queue.poll();
-            time++;
-            for(int i = 0; i < dx.length; i++){
-                int newX = position[0] + dx[i];
-                int newY = position[1] + dy[i];
-                if(newX >= 0 && newX < m && newY >= 0 && newY < n && grid[newX][newY] == 1){
-                    queue.offer(new int[] {newX,newY});
-                    grid[newX][newY] = 2;
-                    num--;
-                }
-            }
-            if(num == 0){
-                return time;
-            }
-        }
-        return num == 0 ? time : -1;
+        return stack.isEmpty();
     }
     @org.junit.jupiter.api.Test
     void test(){
-        int[][] nums = {{2,1,1},{1,1,0},{0,1,1}};
-        orangesRotting(nums);
+        int[] n1 = {1,2,3,4,5};
+        int[] n2 = {4,5,3,2,1};
+        validateStackSequences(n1,n2);
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,3,4,6,9};
-        System.out.println(Arrays.binarySearch(nums,10));
+        LinkedHashMap<Integer,Integer> map = new LinkedHashMap<>();
+
     }
 
 }
