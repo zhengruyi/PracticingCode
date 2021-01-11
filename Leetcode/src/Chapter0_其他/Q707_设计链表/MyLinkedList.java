@@ -1,36 +1,12 @@
-import Chapter13_二叉树.TreeNode;
-import java.util.*;
-
+package Chapter0_其他.Q707_设计链表;
 
 /**
  * @author Ruyi ZHENG
  * @version 1.00
- * @time 08/11/2020 12:55
+ * @time 11/01/2021 22:08
  **/
 
-public class Test {
-    @org.junit.jupiter.api.Test
-    void test(){
-    }
-
-    public static void main(String[] args) {
-        MyLinkedList list = new MyLinkedList();
-        list.addAtHead(2);
-        list.deleteAtIndex(1);
-        list.addAtHead(2);
-        list.addAtHead(7);
-        list.addAtHead(3);
-        list.addAtHead(2);
-        list.addAtHead(5);
-        list.addAtTail(5);
-        list.get(5);
-        list.deleteAtIndex(6);
-        list.deleteAtIndex(4);
-
-    }
-
-}
-class MyLinkedList {
+public class MyLinkedList {
     ListNode dummy;
     int size;
     /** Initialize your data structure here. */
@@ -46,6 +22,7 @@ class MyLinkedList {
         }
         int step = 0;
         ListNode curr = dummy;
+        //这里是等于号因为要指向当前节点
         while(step <= index){
             curr = curr.next;
             step++;
@@ -71,6 +48,7 @@ class MyLinkedList {
         ListNode tmp = new ListNode(val);
         int step = 0;
         ListNode pre = dummy;
+        //这里是小于号因为要定位到index对应节点的前一个节点
         while(pre.next != null && step < index){
             pre = pre.next;
             step++;
@@ -82,7 +60,7 @@ class MyLinkedList {
 
     /** Delete the index-th node in the linked list, if the index is valid. */
     public void deleteAtIndex(int index) {
-        if(index < 0 || index > size){
+        if(index < 0 || index >= size){
             return;
         }
         int step = 0;
