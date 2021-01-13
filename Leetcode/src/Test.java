@@ -45,7 +45,6 @@ public class Test {
         ListNode n1 = new ListNode(-1);
         n2.next = n3;
         n1.next = n2;
-
     }
 
 }
