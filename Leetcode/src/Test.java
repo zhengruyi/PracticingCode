@@ -11,40 +11,28 @@ import java.util.*;
 public class Test {
     @org.junit.jupiter.api.Test
     void test(){
-        ListNode n1 = new ListNode(-2);
-        ListNode n2 = new ListNode(-23);
-        ListNode n3 = new ListNode(-1);
-        n2.next = n3;
-        n1.next = n2;
-        insertionSortList(n1);
+        int[] preOrder = {8,5,1,7,10,12};
+        bstFromPreorder(preOrder);
     }
-    ListNode dummy = new ListNode(-1);
-    public ListNode insertionSortList(ListNode head) {
-        while(head != null){
-            ListNode t = head;
-            head = head.next;
-            insert(t);
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return construct(preorder,0,preorder.length-1);
+    }
+    public TreeNode construct(int[] preorder, int start, int end){
+        if(start > end){
+            return null;
         }
-        return dummy.next;
+        TreeNode root = new TreeNode(preorder[start]);
+        int mid = findIndex(start,end,preorder);
+        root.left = construct(preorder,start+1,mid);
+        root.right = construct(preorder,mid+1,end);
+        return root;
     }
-    public void insert(ListNode node){
-        node.next = null;
-        ListNode prev = dummy;
-        ListNode curr = dummy;
-        while(curr != null && node.val > curr.val){
-            prev = curr;
-            curr = curr.next;
+    public int findIndex(int start, int end, int[]preorder){
+        int i = start;
+        while(i+1 <= end && preorder[i+1] > preorder[start]){
+            i++;
         }
-        node.next = prev.next;
-        prev.next = node;
-    }
-
-    public static void main(String[] args) {
-        ListNode n3 = new ListNode(-2);
-        ListNode n2 = new ListNode(-23);
-        ListNode n1 = new ListNode(-1);
-        n2.next = n3;
-        n1.next = n2;
+        return i;
     }
 
 }
