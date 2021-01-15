@@ -1,19 +1,17 @@
-import Chapter13_二叉树.TreeNode;
-import java.util.*;
-
+package Q10_青蛙跳台问题;
 
 /**
  * @author Ruyi ZHENG
  * @version 1.00
- * @time 08/11/2020 12:55
+ * @time 15/01/2021 21:55
  **/
 
-public class Test {
-    @org.junit.jupiter.api.Test
-    void test(){
-        int[] nums = {1,2,1,3,2,5};
-        numWays(7);
-    }
+public class Solution {
+    /**
+     * 简单的斐波那契数列
+     * @param n
+     * @return
+     */
     public int numWays(int n) {
         int ans = 0;
         int mod = 1_000_000_000 + 7;
@@ -29,19 +27,10 @@ public class Test {
                 ans = p1 + p2;
                 i++;
                 ans = ans % mod;
-                p1 = ans;
                 p2 = p1;
+                p1 = ans;
             }
             return ans;
         }
-    }
-
-}
-
-class ListNode{
-    public int val;
-    public ListNode next;
-    public ListNode(int val){
-        this.val = val;
     }
 }
