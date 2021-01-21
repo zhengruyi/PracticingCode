@@ -1,28 +1,19 @@
-import Chapter13_二叉树.TreeNode;
-import java.util.*;
-
+package Q35_复杂链表的复制;
 
 /**
  * @author Ruyi ZHENG
  * @version 1.00
- * @time 08/11/2020 12:55
+ * @time 21/01/2021 21:31
  **/
 
-public class Test {
-    @org.junit.jupiter.api.Test
-    void test() {
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        n1.next = n2;
-        n2.next = n3;
-        n1.random = n3;
-        copyRandomList(n1);
-    }
-
-    public static void main(String[] args) {
-        System.out.println("\t".length());
-    }
+public class Solution {
+    /**
+     * 先把链表完全复制一遍在把链表的随机指针赋值
+     * 注意处理随机指针可嗯呢该为Null的情况，最后
+     * 再把链表拆分成相等的两部分，完成复制
+     * @param head
+     * @return
+     */
     public Node copyRandomList(Node head) {
         if(head == null){
             return null;
@@ -43,11 +34,12 @@ public class Test {
             h = h.next.next;
         }
         h = head;
-        Node node  = dummy;
+        Node tmp  = dummy;
         while(h != null){
-            node.next = h.next;
+            tmp.next = h.next;
             h.next = h.next.next;
-            node = node.next;
+            tmp = tmp.next;
+            h = h.next;
         }
         return dummy.next;
     }
