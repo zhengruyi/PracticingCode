@@ -11,45 +11,30 @@ import java.util.*;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        n1.next = n2;
-        n2.next = n3;
-        n1.random = n3;
-        copyRandomList(n1);
+        int[][] graph = {{1}, {0,3}, {3}, {1,2}};
+        isBipartite(graph);
     }
 
     public static void main(String[] args) {
         System.out.println("\t".length());
     }
-    public Node copyRandomList(Node head) {
-        if(head == null){
-            return null;
+    public boolean isBipartite(int[][] graph) {
+        if(graph.length == 0 || graph[0].length == 0){
+            return true;
         }
-        Node dummy = new Node(-1);
-        Node h = head;
-        while(h != null){
-            Node tmp = new Node(h.val);
-            tmp.next = h.next;
-            h.next = tmp;
-            h = h.next.next;
-        }
-        h = head;
-        while(h != null){
-            if(h.random != null){
-                h.next.random = h.random.next;
+        int len = graph.length;
+        int[] res = new int[len];
+        res[0] = 1;
+        for(int i = 0; i < len; i++){
+            for(int j = 0; j < graph[i].length; j++){
+                if(res[graph[i][j]] == 0){
+                    res[graph[i][j]] = -1 *res[i];
+                }else if(res[graph[i][j]] != -1 *res[i]){
+                    return false;
+                }
             }
-            h = h.next.next;
         }
-        h = head;
-        Node node  = dummy;
-        while(h != null){
-            node.next = h.next;
-            h.next = h.next.next;
-            node = node.next;
-        }
-        return dummy.next;
+        return true;
     }
 }
 class Node {
