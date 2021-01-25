@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/PracticingCode.iml" filepath="$PROJECT_DIR$/.idea/PracticingCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/剑指offer/剑指offer.iml" filepath="$PROJECT_DIR$/剑指offer/剑指offer.iml" />
       <module fileurl="file://$PROJECT_DIR$/程序员代码面试指南/程序员代码面试指南.iml" filepath="$PROJECT_DIR$/程序员代码面试指南/程序员代码面试指南.iml" />
+      <module fileurl="file://$PROJECT_DIR$/设计模式/设计模式.iml" filepath="$PROJECT_DIR$/设计模式/设计模式.iml" />
       <module fileurl="file://$PROJECT_DIR$/趣学算法/趣学算法.iml" filepath="$PROJECT_DIR$/趣学算法/趣学算法.iml" />
     </modules>
   </component>
