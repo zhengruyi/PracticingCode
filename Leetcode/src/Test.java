@@ -16,7 +16,8 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println("\t".length());
+        Integer[] tmp = {1,2,3};
+        List<Integer> list = Arrays.asList(tmp);
     }
     public boolean isBipartite(int[][] graph) {
         if(graph.length == 0 || graph[0].length == 0){
