@@ -11,31 +11,35 @@ import java.util.*;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        int[][] graph = {{1}, {0,3}, {3}, {1,2}};
-        isBipartite(graph);
+        minimumOperations("rrryyyrryyyrr");
     }
 
     public static void main(String[] args) {
         Integer[] tmp = {1,2,3};
         List<Integer> list = Arrays.asList(tmp);
     }
-    public boolean isBipartite(int[][] graph) {
-        if(graph.length == 0 || graph[0].length == 0){
-            return true;
-        }
-        int len = graph.length;
-        int[] res = new int[len];
-        res[0] = 1;
-        for(int i = 0; i < len; i++){
-            for(int j = 0; j < graph[i].length; j++){
-                if(res[graph[i][j]] == 0){
-                    res[graph[i][j]] = -1 *res[i];
-                }else if(res[graph[i][j]] != -1 *res[i]){
-                    return false;
-                }
+    public int minimumOperations(String leaves) {
+        int length = leaves.length();
+        int[][] dp = new int[3][length];
+        for(int i = 0; i < length; i++){
+            if(i < 1){
+                dp[0][i] = leaves.charAt(i) == 'r' ? 0 : 1;
+            }else{
+                dp[0][i] = dp[0][i-1] + leaves.charAt(i) == 'r' ? 0 : 1;
+            }
+
+            if(i < 1){
+                dp[1][i] = dp[0][i];
+            }else{
+                dp[1][i] = Math.min(dp[1][i-1] + leaves.charAt(i) == 'y' ? 0 : 1, dp[0][i-1] + leaves.charAt(i) == 'y' ? 0 : 1);
+            }
+            if(i < 2){
+                dp[2][i] = dp[1][i];
+            }else{
+                dp[2][i] = Math.min(dp[2][i-1] + leaves.charAt(i) == 'r' ? 0 : 1, dp[1][i-1] + leaves.charAt(i) == 'r' ? 0 : 1);
             }
         }
-        return true;
+        return dp[2][length-1];
     }
 }
 class Node {

@@ -10,6 +10,6 @@ import Q2_抽象工厂.Shape.Shape;
  **/
 
 public abstract class AbstractFactory {
-    public abstract Shape getShape(String shpeType);
+    public abstract Shape getShape(String shapeType);
     public abstract Color getColor(String color);
 }

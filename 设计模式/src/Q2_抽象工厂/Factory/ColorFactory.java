@@ -14,12 +14,12 @@ import Q2_抽象工厂.Shape.Shape;
 
 public class ColorFactory extends AbstractFactory{
     @Override
-    public Shape getShapeFactory(String shpeType) {
+    public Shape getShape(String shapeType) {
         return null;
     }
 
     @Override
-    public Color getColorFactory(String color) {
+    public Color getColor(String color) {
         if(color == null){
             return null;
         }

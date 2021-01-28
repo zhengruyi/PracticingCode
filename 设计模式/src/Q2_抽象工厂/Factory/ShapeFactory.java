@@ -14,7 +14,7 @@ import Q2_抽象工厂.Shape.Square;
 
 public class ShapeFactory extends AbstractFactory{
     @Override
-    public Shape getShapeFactory(String shapeType) {
+    public Shape getShape(String shapeType) {
         if(shapeType == null){
             return null;
         }
@@ -29,7 +29,7 @@ public class ShapeFactory extends AbstractFactory{
     }
 
     @Override
-    public Color getColorFactory(String color) {
+    public Color getColor(String color) {
         return null;
     }
 }
