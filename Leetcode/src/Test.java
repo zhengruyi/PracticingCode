@@ -14,9 +14,8 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        int[][] workers = {{0,0},{2,1}};
-        int[][] bikes = {{1,2},{3,3}};
-        assignBikes(workers,bikes);
+        backspaceCompare("y#fo##f"
+                ,"y#f#o##f");
     }
 
     public static void main(String[] args) {
@@ -24,31 +23,25 @@ public class Test {
     }
     int[] dx = {-2,-2,-1,-1,1,1,2,2};
     int[] dy = {1,-1,2,-2,2,-2,1,-1};
-    public int assignBikes(int[][] workers, int[][] bikes) {
-        PriorityQueue<Allocation> pq = new PriorityQueue<>((a,b) ->{
-            if(a.distance != b.distance){return a.distance - b.distance;}
-            if(a.workerId != b.workerId){return a.workerId - b.workerId;}
-            return a.bikeId - b.bikeId;
-        });
-        int len1 = workers.length;
-        int len2 = bikes.length;
-        for(int i = 0; i < len1; i++){
-            for(int j = 0; j < len2; j++){
-                pq.add(new Allocation(i,j,getDistance(workers[i],bikes[j])));
+    public boolean backspaceCompare(String S, String T) {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < S.length(); i++){
+            if(S.charAt(i) == '#' && builder.length() > 0){
+                builder.deleteCharAt(builder.length() - 1);
+            }else{
+                builder.append(S.charAt(i));
             }
         }
-        int res = 0;
-        boolean[] usedWorker = new boolean[len1];
-        boolean[] usedBike = new boolean[len2];
-        while(!pq.isEmpty()){
-            Allocation a = pq.poll();
-            if(!usedWorker[a.workerId] && !usedBike[a.bikeId]){
-                usedWorker[a.workerId] = true;
-                usedBike[a.bikeId] = true;
-                res += a.distance;
+        String s1 = builder.toString();
+        builder.delete(0,builder.length());
+        for(int i = 0; i < T.length(); i++){
+            if(T.charAt(i) == '#' && builder.length() > 0){
+                builder.deleteCharAt(builder.length() - 1);
+            }else{
+                builder.append(T.charAt(i));
             }
         }
-        return res;
+        return builder.toString().equals(s1);
     }
     public int getDistance(int[] x1, int[] y1){
         return Math.abs(x1[0] - y1[0]) + Math.abs(x1[1] - y1[1]);
