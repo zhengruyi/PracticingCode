@@ -14,42 +14,31 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        int[][] grid = {{1,1,0,1,1},{1,0,0,0,0},{0,0,0,0,1},{1,1,0,1,1}};
-        numDistinctIslands(grid);
+        int[] n1 = {1972,1908,1915,1957,1960,1948,1912,1903,1949,1977,1900,1957,1934,1929,1913,1902,1903,1901
+};
+        int[] n2 = {1997,1932,1963,1997,1983,2000,1926,1962,1955,1997,1998,1989,1992,1975,1940,1903,1983,1969};
+        maxAliveYear(n1,n2);
     }
 
     public static void main(String[] args) {
         System.out.println(IntStream.range(0,4).sum());
     }
-    int[] dx = {0,0,1,-1};
-    int[] dy = {1,-1,0,0};
-    public int numDistinctIslands(int[][] grid) {
-        Set<List<int[]>> set = new HashSet();
-        int[][] visited = new int[grid.length][grid[0].length];
-        for(int i = 0; i < grid.length; i++){
-            for(int j = 0; j < grid[0].length; j++){
-                if(grid[i][j] == 1 && visited[i][j] == 0){
-                    List<int[]> shape = new ArrayList();
-                    dfs(grid,visited,shape,i,j);
-                    for(int[] location : shape){
-                        location[0] = location[0] - i;
-                        location[1] = location[1] - j;
-                    }
-                    set.add(shape);
-                }
+    public int maxAliveYear(int[] birth, int[] death) {
+        int[] nums = new int[10002];
+        int[] sum = new int[10002];
+        for(int i = 0; i < birth.length; i++){
+            nums[birth[i]] += 1;
+            nums[death[i] + 1] -= 1;
+        }
+        for(int i = 1; i < nums.length; i++){
+            sum[i] = sum[i-1] + nums[i];
+        }
+        int max = Arrays.stream(nums).max().getAsInt();
+        for(int i = 0; i < nums.length; i++){
+            if(sum[i] == max){
+                return i;
             }
         }
-        return set.size();
-    }
-    public void dfs(int[][] grid, int[][] visited, List<int[]> shape, int x, int y){
-        shape.add(new int[]{x,y});
-        visited[x][y] = 1;
-        for(int i = 0; i < dx.length; i++){
-            int newX = x + dx[i];
-            int newY = y + dy[i];
-            if(newX >= 0 && newX < grid.length && newY >= 0 && newY < grid[0].length && visited[newX][newY] == 0 && grid[newX][newY] == 1){
-                dfs(grid,visited,shape,newX,newY);
-            }
-        }
+        return -1;
     }
 }
