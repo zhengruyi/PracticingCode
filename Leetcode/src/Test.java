@@ -14,31 +14,30 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        int[] n1 = {1972,1908,1915,1957,1960,1948,1912,1903,1949,1977,1900,1957,1934,1929,1913,1902,1903,1901
-};
-        int[] n2 = {1997,1932,1963,1997,1983,2000,1926,1962,1955,1997,1998,1989,1992,1975,1940,1903,1983,1969};
-        maxAliveYear(n1,n2);
+        canWin("++++");
     }
 
     public static void main(String[] args) {
         System.out.println(IntStream.range(0,4).sum());
     }
-    public int maxAliveYear(int[] birth, int[] death) {
-        int[] nums = new int[10002];
-        int[] sum = new int[10002];
-        for(int i = 0; i < birth.length; i++){
-            nums[birth[i]] += 1;
-            nums[death[i] + 1] -= 1;
+    public boolean canWin(String s) {
+        if(s.length() < 2){
+            return false;
         }
-        for(int i = 1; i < nums.length; i++){
-            sum[i] = sum[i-1] + nums[i];
-        }
-        int max = Arrays.stream(nums).max().getAsInt();
-        for(int i = 0; i < nums.length; i++){
-            if(sum[i] == max){
-                return i;
+        return Win(s.toCharArray());
+    }
+    public boolean Win(char[] chas){
+        for(int i = 1; i < chas.length; i++){
+            if(chas[i-1] == '+' && chas[i] == '+'){
+                chas[i] = '-';
+                chas[i-1] = '-';
+                if(!Win(chas)){
+                    return true;
+                }
+                chas[i] = '+';
+                chas[i-1] = '+';
             }
         }
-        return -1;
+        return false;
     }
 }
