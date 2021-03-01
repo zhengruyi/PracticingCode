@@ -14,30 +14,31 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        canWin("++++");
     }
 
     public static void main(String[] args) {
-        System.out.println(IntStream.range(0,4).sum());
-    }
-    public boolean canWin(String s) {
-        if(s.length() < 2){
-            return false;
+        Scanner in = new Scanner(System.in);
+        int len = in.nextInt();
+        int[] nums = new int[len];
+        in.nextLine();
+        String input = in.nextLine();
+        for(int i = 0; i < len; i++){
+            nums[i] = input.charAt(i) - '0';
         }
-        return Win(s.toCharArray());
-    }
-    public boolean Win(char[] chas){
-        for(int i = 1; i < chas.length; i++){
-            if(chas[i-1] == '+' && chas[i] == '+'){
-                chas[i] = '-';
-                chas[i-1] = '-';
-                if(!Win(chas)){
-                    return true;
-                }
-                chas[i] = '+';
-                chas[i-1] = '+';
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i = 0; i < len; i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i],i);
             }
         }
-        return false;
+        int[] dp = new int[len+1];
+        for(int i = 2; i <= len; i++){
+            int jump = Integer.MAX_VALUE;
+            if(map.containsKey(nums[i-1]) && map.get(nums[i-1]) != i-1){
+                jump = dp[map.get(nums[i-1]) + 1] + 1;
+            }
+            dp[i] = Math.min(dp[i-1]+ 1, jump);
+        }
+        System.out.println(dp[len]);
     }
 }
