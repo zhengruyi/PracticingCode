@@ -14,6 +14,7 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
+        isArmstrong(153);
     }
 
     public static void main(String[] args) {
@@ -40,5 +41,19 @@ public class Test {
             dp[i] = Math.min(dp[i-1]+ 1, jump);
         }
         System.out.println(dp[len]);
+    }
+    public boolean isArmstrong(int N) {
+        long res = 0;
+        int origin = 0;
+        int len = String.valueOf(N).length();
+        while(N > 0){
+            int num = N % 10;
+            N /= 10;
+            res = res + (long)Math.pow(num,len);
+            if(res > origin){
+                return false;
+            }
+        }
+        return (int)res == origin;
     }
 }
