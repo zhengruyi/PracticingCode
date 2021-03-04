@@ -1,4 +1,4 @@
-package Chapter16_高级数据结构.Q1202_交换字符串中的元素;
+package Chapter16_高级数据结构和高级算法.Q1202_交换字符串中的元素;
 
 import java.util.*;
 

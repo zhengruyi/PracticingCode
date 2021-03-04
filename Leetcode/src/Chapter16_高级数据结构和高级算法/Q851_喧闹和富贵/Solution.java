@@ -1,4 +1,4 @@
-package Chapter16_高级数据结构.Q851_喧闹和富贵;
+package Chapter16_高级数据结构和高级算法.Q851_喧闹和富贵;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

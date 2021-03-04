@@ -1,4 +1,4 @@
-package Chapter16_高级数据结构.Q648_单词替换;
+package Chapter16_高级数据结构和高级算法.Q648_单词替换;
 
 import java.util.List;
 

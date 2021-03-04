@@ -1,4 +1,4 @@
-package Chapter16_高级数据结构.Q1319_连通网络的操作次数;
+package Chapter16_高级数据结构和高级算法.Q1319_连通网络的操作次数;
 
 /**
  * @author Ruyi ZHENG
