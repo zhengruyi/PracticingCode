@@ -14,46 +14,37 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        isArmstrong(153);
+        int[] nums1 = {1,2,3,4,5,6};
+        int[] nums2 = {1,1,2,2,2,2};
+        minOperations(nums1,nums2);
     }
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int len = in.nextInt();
-        int[] nums = new int[len];
-        in.nextLine();
-        String input = in.nextLine();
-        for(int i = 0; i < len; i++){
-            nums[i] = input.charAt(i) - '0';
-        }
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for(int i = 0; i < len; i++){
-            if(!map.containsKey(nums[i])){
-                map.put(nums[i],i);
-            }
-        }
-        int[] dp = new int[len+1];
-        for(int i = 2; i <= len; i++){
-            int jump = Integer.MAX_VALUE;
-            if(map.containsKey(nums[i-1]) && map.get(nums[i-1]) != i-1){
-                jump = dp[map.get(nums[i-1]) + 1] + 1;
-            }
-            dp[i] = Math.min(dp[i-1]+ 1, jump);
-        }
-        System.out.println(dp[len]);
     }
-    public boolean isArmstrong(int N) {
-        long res = 0;
-        int origin = 0;
-        int len = String.valueOf(N).length();
-        while(N > 0){
-            int num = N % 10;
-            N /= 10;
-            res = res + (long)Math.pow(num,len);
-            if(res > origin){
-                return false;
+    public int minOperations(int[] nums1, int[] nums2) {
+        int dist = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue(new Comparator<Integer>(){
+            @Override
+            public int compare(Integer i1, Integer i2){
+                return i2 - i1;
             }
+        });
+        int len = Math.max(nums1.length,nums2.length);
+        for(int i = 0; i < len; i++){
+            int n1 = 0, n2 = 0;
+            if(i < nums1.length){n1 = nums1[i];}
+            if(i < nums2.length){n2 = nums1[i];}
+            dist += n1 - n2;
+            int d1 = Math.max(6 - n1, n1 - 1);
+            int d2 = Math.max(6 - n2, n2 - 1);
+            pq.add(Math.max(d1,d2));
         }
-        return (int)res == origin;
+        dist = Math.abs(dist);
+        int res = 0;
+        while(dist > 0){
+            dist -= pq.poll();
+            res++;
+        }
+        return res;
     }
 }

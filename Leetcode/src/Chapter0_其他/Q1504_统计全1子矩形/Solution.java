@@ -11,6 +11,7 @@ public class Solution {
         int res = 0;
         int m = mat.length;
         int n = mat[0].length;
+        //逐行遍历
         for(int i = 0; i < m; i++){
             for(int j = i; j < m; j++){
                 int now = 0;
