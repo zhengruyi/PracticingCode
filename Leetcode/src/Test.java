@@ -14,30 +14,32 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
-        String s = "++++";
-        Win(s.toCharArray());
     }
 
     public static void main(String[] args) {
     }
+
+
     public boolean canWin(String s) {
         if(s.length() < 2){
             return false;
         }
         return Win(s.toCharArray());
     }
-    public boolean Win(char[] chas){
-        for(int i = 1; i < chas.length; i++){
-            if(chas[i-1] == '+' && chas[i] == '+'){
+
+    public boolean Win(char[] chas) {
+        for (int i = 1; i < chas.length; i++) {
+            if (chas[i - 1] == '+' && chas[i] == '+') {
                 chas[i] = '-';
-                chas[i-1] = '-';
-                if(!Win(chas)){
+                chas[i - 1] = '-';
+                if (!Win(chas)) {
                     return true;
                 }
                 chas[i] = '+';
-                chas[i-1] = '+';
+                chas[i - 1] = '+';
             }
         }
         return false;
     }
+
 }
