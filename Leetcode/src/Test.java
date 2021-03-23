@@ -14,6 +14,8 @@ import java.util.stream.IntStream;
 public class Test {
     @org.junit.jupiter.api.Test
     void test() {
+        int[] nums = {2,5,5-7,4};
+        minElements(nums,7,464680098);
     }
 
     public static void main(String[] args){
@@ -55,28 +57,18 @@ public class Test {
         }
 
     }
-
-
-    public boolean canWin(String s) {
-        if(s.length() < 2){
-            return false;
+    public int minElements(int[] nums, int limit, int goal) {
+        int sum = Arrays.stream(nums).sum();
+        int gap = 0;
+        if(sum * goal >= 0){
+            gap = Math.abs(goal - sum);
+        }else{
+            gap = Math.abs(goal) + Math.abs(sum);
         }
-        return Win(s.toCharArray());
-    }
-
-    public boolean Win(char[] chas) {
-        for (int i = 1; i < chas.length; i++) {
-            if (chas[i - 1] == '+' && chas[i] == '+') {
-                chas[i] = '-';
-                chas[i - 1] = '-';
-                if (!Win(chas)) {
-                    return true;
-                }
-                chas[i] = '+';
-                chas[i - 1] = '+';
-            }
+        if(gap % limit == 0){
+            return gap / limit;
+        }else{
+            return gap / limit + 1;
         }
-        return false;
     }
-
 }
