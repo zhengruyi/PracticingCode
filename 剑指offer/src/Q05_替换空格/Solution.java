@@ -8,6 +8,7 @@ package Q05_替换空格;
 
 public class Solution {
     public String replaceSpace(String s) {
+        //进行大量的字符串的替换
         return s.replaceAll(" ","%20");
     }
 }
