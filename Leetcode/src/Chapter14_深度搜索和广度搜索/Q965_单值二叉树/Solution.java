@@ -13,6 +13,11 @@ public class Solution {
         dfs(root);
         return res;
     }
+
+    /**
+     * 简单的深度搜索
+     * @param root
+     */
     public void dfs(TreeNode root){
         if(root == null){
             return;
