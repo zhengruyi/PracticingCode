@@ -15,7 +15,7 @@ public class Solution {
     }
 
     /**
-     * 简单的深度搜索
+     * 简单的深度搜索,通过记忆全局的节点的值来判断一棵树上是否有多个不同的值
      * @param root
      */
     public void dfs(TreeNode root){
