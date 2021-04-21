@@ -7,7 +7,9 @@ package Chapter14_深度搜索和广度搜索.Q965_单值二叉树;
  **/
 
 public class Solution {
+    //二叉树上是否只有一个值
     boolean res = true;
+    //节点值的全局变量
     Integer lastVal = null;
     public boolean isUnivalTree(TreeNode root) {
         dfs(root);
