@@ -12,6 +12,7 @@ public class Solution {
     //节点值的全局变量
     Integer lastVal = null;
     public boolean isUnivalTree(TreeNode root) {
+        //执行深度搜索
         dfs(root);
         return res;
     }
