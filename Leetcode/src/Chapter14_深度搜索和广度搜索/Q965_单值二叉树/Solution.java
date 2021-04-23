@@ -32,6 +32,7 @@ public class Solution {
             res = false;
             return;
         }
+        //先搜索当前节点，在搜索左右子树
         dfs(root.left);
         dfs(root.right);
     }
