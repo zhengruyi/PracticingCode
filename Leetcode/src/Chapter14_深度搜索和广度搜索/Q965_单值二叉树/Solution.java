@@ -28,6 +28,7 @@ public class Solution {
         if(lastVal == null){
             lastVal = root.val;
         }
+        //记录结果
         if(root.val != lastVal){
             res = false;
             return;
